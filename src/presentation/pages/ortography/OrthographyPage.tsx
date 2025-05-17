@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { GptMessage, MyMessage, TextMessageBox, TypingLoader } from "../../components"
+import { orthographyUseCase } from "../../../core/use-cases"
 
 interface Message {
   text: string
@@ -16,8 +17,10 @@ export const OrthographyPage = () => {
     setIsLoading(true)
     setMessages(prev => [...prev, { text, isGpt: false }])
 
-    // Simulate a delay for the response
-    await new Promise(resolve => setTimeout(resolve, 2000))
+    const data = await orthographyUseCase(text)
+
+    console.log(data);
+
 
     // Simulate a response from the GPT model
     const gptResponse = "Esto es una respuesta de OpenAI"
