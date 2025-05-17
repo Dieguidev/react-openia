@@ -1,54 +1,111 @@
-# React + TypeScript + Vite
+<!-- filepath: g:\PROYECTOS\NEST\FH\OPENIA\react-gpt\README.md -->
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<p align="center">
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" width="60" height="60"/>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" width="60" height="60"/>
+</p>
 
-Currently, two official plugins are available:
+<h1 align="center">ReactGPT</h1>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+<p align="center">
+  <b>Aplicación web de corrección ortográfica, traducción, pros & cons, y más, potenciada por IA y construida con React + TypeScript + Vite.</b>
+</p>
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🚀 Características principales
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+- ✍️ <b>Ortografía:</b> Corrige textos en español y muestra errores ortográficos y sugerencias.
+- ⚖️ <b>Pros & Cons:</b> Compara ventajas y desventajas de cualquier tema.
+- 🔄 <b>Traducción:</b> Traduce textos a otros idiomas.
+- 🔊 <b>Texto a audio:</b> Convierte texto en audio.
+- 🖼️ <b>Imágenes:</b> Genera y edita imágenes con IA.
+- 🎤 <b>Audio a texto:</b> Transcribe audio a texto.
+- 🤖 <b>Asistente:</b> Accede a información y ayuda personalizada.
+- 💬 <b>Interfaz de chat moderna:</b> Experiencia conversacional con diseño oscuro, burbujas de chat y scroll personalizado.
+
+---
+
+## 🖥️ Vista previa
+
+<p align="center">
+  <img src="https://i.imgur.com/1Q9Z1ZB.png" width="600" alt="Vista previa ReactGPT"/>
+</p>
+
+---
+
+## 🛠️ Tecnologías utilizadas
+
+- <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" width="24"/> React 19
+- <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" width="24"/> TypeScript
+- <img src="https://vitejs.dev/logo.svg" width="24"/> Vite
+- <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg" width="24"/> TailwindCSS
+- <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" width="24"/> Node.js (backend IA)
+
+---
+
+## 📦 Instalación y uso
+
+1. Clona el repositorio:
+   ```bash
+   git clone https://github.com/Dieguidev/react-openia
+   cd react-gpt
+   ```
+2. Instala las dependencias:
+   ```bash
+   npm install
+   ```
+3. Configura las variables de entorno:
+   - Copia `.env.template` a `.env` y ajusta la URL de la API si es necesario.
+4. Inicia la aplicación:
+   ```bash
+   npm run dev
+   ```
+5. Accede a [http://localhost:5173](http://localhost:5173) en tu navegador.
+
+---
+
+## 📁 Estructura del proyecto
+
+```
+react-gpt/
+├── src/
+│   ├── core/           # Casos de uso y lógica de negocio
+│   ├── interfaces/     # Tipos e interfaces TypeScript
+│   ├── presentation/   # Componentes, páginas y layouts
+│   └── main.tsx        # Punto de entrada principal
+├── public/             # Archivos estáticos
+├── .env.template       # Variables de entorno de ejemplo
+├── package.json        # Dependencias y scripts
+└── README.md           # Este archivo
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## ✨ Ejemplo de funcionalidades
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+- <b>Corrección ortográfica:</b>
+  - Escribe un texto y recibe sugerencias y puntaje de ortografía.
+- <b>Chat UI:</b>
+  - Burbujas diferenciadas para usuario y asistente.
+  - Scroll automático y personalizado.
+  - Diseño responsive y moderno.
+
+---
+
+## 🧑‍💻 Contribuciones
+
+¡Las contribuciones son bienvenidas! Si tienes ideas, mejoras o encuentras bugs, abre un issue o un pull request.
+
+---
+
+## 📄 Licencia
+
+MIT
+
+---
+
+<p align="center">
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" width="40"/>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" width="40"/>
+</p>
