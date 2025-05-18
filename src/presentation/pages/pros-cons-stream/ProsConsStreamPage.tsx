@@ -19,8 +19,28 @@ export const ProsConsStreamPage = () => {
     setIsLoading(true)
     setMessages(prev => [...prev, { text, isGpt: false }])
 
-    await prosConsStreamUseCase(text)
+    const reader = await prosConsStreamUseCase(text)
     setIsLoading(false)
+    if (!reader) return alert("No se pudo generar la respuesta")
+
+    //Generar el ultimo mensaje
+    const decoder = new TextDecoder("utf-8")
+    let message = '';
+    setMessages(prev => [...prev, { text: message, isGpt: true }])
+
+    while (true) {
+      const { done, value } = await reader.read()
+      if (done) break
+
+      const decodedChunk = decoder.decode(value, { stream: true })
+      message += decodedChunk
+
+      setMessages(prev => {
+        const newMessages = [...prev]
+        newMessages[newMessages.length - 1].text = message
+        return newMessages
+      })
+    }
   }
 
   return (
@@ -33,7 +53,7 @@ export const ProsConsStreamPage = () => {
           {
             messages.map((message, index) => (
               message.isGpt
-                ? <GptMessage key={index} text='esto es de openia' />
+                ? <GptMessage key={index} text={message.text} />
                 : <MyMessage key={index} text={message.text} />
             ))
           }

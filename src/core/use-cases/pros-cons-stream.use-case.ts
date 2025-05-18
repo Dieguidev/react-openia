@@ -9,6 +9,7 @@ export const prosConsStreamUseCase = async (prompt: string) => {
           Authorization: `Bearer ${import.meta.env.VITE_GPT_API_KEY}`,
         },
         body: JSON.stringify({ prompt }),
+        //TODO: abortSignal
       }
     );
 
@@ -21,19 +22,20 @@ export const prosConsStreamUseCase = async (prompt: string) => {
       return null;
     }
 
-    const decoder = new TextDecoder("utf-8");
+    return reader;
 
-    let text = "";
+    // const decoder = new TextDecoder("utf-8");
 
-    while (true) {
-      const { done, value } = await reader.read();
-      if (done) break;
+    // let text = "";
 
-      const decodedChunk = decoder.decode(value, { stream: true });
-      text += decodedChunk;
-      console.log(text);
-    }
-    // const parsedResponse = JSON.parse(text) as ProsConsResponse;
+    // while (true) {
+    //   const { done, value } = await reader.read();
+    //   if (done) break;
+
+    //   const decodedChunk = decoder.decode(value, { stream: true });
+    //   text += decodedChunk;
+    //   console.log(text);
+    // }
   } catch (error) {
     console.log(error);
 
