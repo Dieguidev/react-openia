@@ -8,7 +8,7 @@
 <h1 align="center">ReactGPT</h1>
 
 <p align="center">
-  <b>Aplicación web de corrección ortográfica, traducción, pros & cons, y más, potenciada por IA y construida con React + TypeScript + Vite.</b>
+  <b>Aplicación web de corrección ortográfica, traducción, pros & cons, comparación en streaming, y más, potenciada por IA y construida con React + TypeScript + Vite.</b>
 </p>
 
 ---
@@ -17,12 +17,14 @@
 
 - ✍️ <b>Ortografía:</b> Corrige textos en español y muestra errores ortográficos y sugerencias.
 - ⚖️ <b>Pros & Cons:</b> Compara ventajas y desventajas de cualquier tema.
+- ⚡ <b>Pros & Cons Streaming:</b> Compara pros y contras en tiempo real, mostrando la respuesta progresivamente mientras se recibe del backend.
 - 🔄 <b>Traducción:</b> Traduce textos a otros idiomas.
 - 🔊 <b>Texto a audio:</b> Convierte texto en audio.
 - 🖼️ <b>Imágenes:</b> Genera y edita imágenes con IA.
 - 🎤 <b>Audio a texto:</b> Transcribe audio a texto.
 - 🤖 <b>Asistente:</b> Accede a información y ayuda personalizada.
 - 💬 <b>Interfaz de chat moderna:</b> Experiencia conversacional con diseño oscuro, burbujas de chat y scroll personalizado.
+- ⏹️ <b>Cancelación de streaming:</b> Permite cancelar una comparación en streaming y enviar una nueva sin problemas de concurrencia.
 
 ---
 
@@ -86,6 +88,11 @@ react-gpt/
 
 - <b>Corrección ortográfica:</b>
   - Escribe un texto y recibe sugerencias y puntaje de ortografía.
+- <b>Pros & Cons:</b>
+  - Compara ventajas y desventajas de cualquier tema.
+- <b>Pros & Cons Streaming:</b>
+  - Recibe la comparación en tiempo real, viendo cómo se construye la respuesta progresivamente.
+  - Puedes cancelar una comparación en curso y enviar una nueva inmediatamente.
 - <b>Chat UI:</b>
   - Burbujas diferenciadas para usuario y asistente.
   - Scroll automático y personalizado.
