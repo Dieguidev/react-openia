@@ -20,6 +20,7 @@ export const TextMessageBoxSelect = ({ onSendMessage, disableCorrections = false
   const handleSendMessage = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (message.trim() === '') return;
+    if (selectedOption.trim() === '') return;
 
     onSendMessage(message, selectedOption);
     setMessage('');
