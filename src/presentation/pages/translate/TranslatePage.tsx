@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { GptMessage, MyMessage, TypingLoader, TextMessageBoxSelect } from "../../components"
+import { translateTextUseCase } from "../../../core/use-cases";
 
 interface Message {
   text: string
@@ -32,12 +33,15 @@ export const TranslatePage = () => {
     const newMessage = `Traduce : "${text}" al idioma ${selectedOption}`
     setMessages(prev => [...prev, { text: newMessage, isGpt: false }])
 
-    // Simulate a delay for the response
-    await new Promise(resolve => setTimeout(resolve, 2000))
-
-    // Simulate a response from the GPT model
-    const gptResponse = "Esto es una respuesta de OpenAI"
-    setMessages(prev => [...prev, { text: gptResponse, isGpt: true }])
+    const data = await translateTextUseCase(text, selectedOption)
+    if (!data.ok) {
+      setMessages(prev => [...prev, { text: 'No se pudo traducir el texto', isGpt: true }])
+    } else {
+      setMessages(prev => [...prev, {
+        text: data.message,
+        isGpt: true
+      }])
+    }
     setIsLoading(false)
   }
 
