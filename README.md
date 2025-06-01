@@ -15,16 +15,16 @@
 
 ## 🚀 Características principales
 
-- ✍️ <b>Ortografía:</b> Corrige textos en español y muestra errores ortográficos y sugerencias.
-- ⚖️ <b>Pros & Cons:</b> Compara ventajas y desventajas de cualquier tema.
-- ⚡ <b>Pros & Cons Streaming:</b> Compara pros y contras en tiempo real, mostrando la respuesta progresivamente mientras se recibe del backend.
-- 🔄 <b>Traducción:</b> Traduce textos a otros idiomas.
-- 🔊 <b>Texto a audio:</b> Convierte texto en audio.
-- 🖼️ <b>Imágenes:</b> Genera y edita imágenes con IA.
-- 🎤 <b>Audio a texto:</b> Transcribe audio a texto.
-- 🤖 <b>Asistente:</b> Accede a información y ayuda personalizada.
-- 💬 <b>Interfaz de chat moderna:</b> Experiencia conversacional con diseño oscuro, burbujas de chat y scroll personalizado.
-- ⏹️ <b>Cancelación de streaming:</b> Permite cancelar una comparación en streaming y enviar una nueva sin problemas de concurrencia.
+- ✍️ <b>Corrección Ortográfica:</b> Corrige textos en español con puntuación, retroalimentación detallada y errores destacados.
+- ⚖️ <b>Pros & Cons:</b> Análisis detallado de ventajas y desventajas de cualquier tema mediante IA.
+- ⚡ <b>Pros & Cons Streaming:</b> Visualización en tiempo real de la respuesta generada por IA con soporte para cancelación.
+- 🔄 <b>Traducción:</b> Traducción a múltiples idiomas con selector integrado y soporte streaming.
+- 🔊 <b>Texto a audio:</b> Convertidor de texto a voz (en desarrollo).
+- 🖼️ <b>Generación de imágenes:</b> Creación y edición de imágenes con IA (en desarrollo).
+- 🎤 <b>Audio a texto:</b> Transcripción de audio a texto (en desarrollo).
+- 🤖 <b>Asistente avanzado:</b> Asistente IA personalizado (en desarrollo).
+- 💬 <b>Interfaz de chat moderna:</b> UI con tema oscuro, burbujas de chat y soporte para markdown.
+- ⏹️ <b>Sistema de cancelación:</b> Cancelación de peticiones en streaming para evitar problemas de concurrencia.
 
 ---
 
@@ -43,6 +43,9 @@
 - <img src="https://vitejs.dev/logo.svg" width="24"/> Vite
 - <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg" width="24"/> TailwindCSS
 - <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" width="24"/> Node.js (backend IA)
+- Fetch API con streaming y generators
+- React Router DOM para navegación
+- React Markdown para visualización de texto con formato
 
 ---
 
@@ -58,7 +61,10 @@
    npm install
    ```
 3. Configura las variables de entorno:
-   - Copia `.env.template` a `.env` y ajusta la URL de la API si es necesario.
+   - Copia `.env.template` a `.env` y ajusta la URL de la API:
+   ```
+   VITE_GPT_API=http://localhost:3000/gpt
+   ```
 4. Inicia la aplicación:
    ```bash
    npm run dev
@@ -73,8 +79,13 @@
 react-gpt/
 ├── src/
 │   ├── core/           # Casos de uso y lógica de negocio
-│   ├── interfaces/     # Tipos e interfaces TypeScript
-│   ├── presentation/   # Componentes, páginas y layouts
+│   │   └── use-cases/  # Implementaciones de funcionalidades (ortografía, traducción, etc.)
+│   ├── interfaces/     # Tipos e interfaces TypeScript para respuestas API
+│   ├── presentation/   # Frontend de la aplicación
+│   │   ├── components/ # Componentes reutilizables (chat bubbles, inputs, etc.)
+│   │   ├── layouts/    # Estructura visual principal
+│   │   ├── pages/      # Páginas para cada funcionalidad
+│   │   └── router/     # Configuración de rutas
 │   └── main.tsx        # Punto de entrada principal
 ├── public/             # Archivos estáticos
 ├── .env.template       # Variables de entorno de ejemplo
@@ -84,25 +95,114 @@ react-gpt/
 
 ---
 
-## ✨ Ejemplo de funcionalidades
+## 📌 Funcionalidades implementadas en detalle
 
-- <b>Corrección ortográfica:</b>
-  - Escribe un texto y recibe sugerencias y puntaje de ortografía.
-- <b>Pros & Cons:</b>
-  - Compara ventajas y desventajas de cualquier tema.
-- <b>Pros & Cons Streaming:</b>
-  - Recibe la comparación en tiempo real, viendo cómo se construye la respuesta progresivamente.
-  - Puedes cancelar una comparación en curso y enviar una nueva inmediatamente.
-- <b>Chat UI:</b>
-  - Burbujas diferenciadas para usuario y asistente.
-  - Scroll automático y personalizado.
-  - Diseño responsive y moderno.
+### ✍️ Corrección Ortográfica
+
+- Envía textos en español para corrección ortográfica instantánea.
+- Recibe puntuación de precisión ortográfica (0-100%).
+- Lista detallada de errores encontrados y sugerencias de mejora.
+- Interfaz especial `GptOrthographyMessage` para mostrar resultados formatados.
+
+**Ejemplo de uso:**
+
+1. Escribe un texto con errores deliberados.
+2. El sistema analiza y muestra errores específicos.
+3. Se proporciona una puntuación de calidad ortográfica.
+
+---
+
+### ⚖️ Pros & Cons (Análisis de ventajas y desventajas)
+
+- Comparación balanceada de cualquier tema, producto o decisión.
+- Análisis estructurado dividido en pros y contras.
+- Implementado mediante case de uso `prosConsUseCase` para obtener respuestas completas.
+
+**Ejemplo de uso:**
+
+1. Escribe el tema a analizar (ej: "Trabajar desde casa vs oficina").
+2. Recibe un análisis detallado de ambas perspectivas.
+
+---
+
+### ⚡ Pros & Cons con Streaming
+
+- Visualiza en tiempo real cómo se construye la respuesta del modelo AI.
+- Usa `prosConsStreamGeneratorUseCase` con JavaScript generators para streaming.
+- Sistema de cancelación implementado con `AbortController` para detener consultas.
+
+**Características técnicas:**
+
+- Utiliza `useRef` para mantener el estado del controlador de cancelación.
+- Control de concurrencia con referencia a estado activo (`isRunning`).
+- Actualización progresiva del mensaje a medida que llegan nuevos fragmentos.
+
+**Ejemplo de uso:**
+
+1. Inicia una consulta.
+2. Observa cómo la respuesta se construye progresivamente.
+3. Puedes cancelar y comenzar una nueva consulta sin esperar que finalice.
+
+---
+
+### 🔄 Traducción con Streaming
+
+- Traducción de texto a 10 idiomas diferentes (alemán, árabe, bengalí, francés, hindi, inglés, japonés, mandarín, portugués, ruso).
+- Selector de idioma integrado usando `TextMessageBoxSelect`.
+- Visualización en tiempo real de la traducción mediante streaming.
+- Controlador de cancelación para interrumpir traducciones en curso.
+
+**Características técnicas:**
+
+- Implementado con `translateStreamUseCase` utilizando generators y streaming.
+- Usa `TextDecoder` para decodificar chunks de respuesta recibidos del backend.
+- Soporte para cancelación y reinicio de traducciones.
+
+---
+
+### 💬 Interfaz de Usuario
+
+- Diseño oscuro moderno con esquema de colores azul/índigo.
+- Componentes de mensajes diferenciados:
+  - `MyMessage`: Burbujas de usuario alineadas a la derecha
+  - `GptMessage`: Burbujas de asistente alineadas a la izquierda
+  - `GptOrthographyMessage`: Visualización especial para correcciones
+- Soporte para renderizado Markdown en respuestas del asistente.
+- Animación de carga `TypingLoader` para indicar actividad.
+- Layout principal con menú lateral para navegación entre funcionalidades.
+
+---
+
+### ⚙️ Arquitectura
+
+- Patrón de casos de uso para encapsular la lógica de negocio.
+- Separación de interfaces para tipado de respuestas API.
+- Componentización de UI para maximizar reutilización.
+- Sistema de streaming basado en generators para respuestas en tiempo real.
+- Manejo de estado con React hooks (`useState`, `useRef`).
+- Control de concurrencia para prevenir problemas con múltiples peticiones.
+
+---
+
+## 🚧 Funcionalidades en desarrollo
+
+- 🔊 **Texto a Audio**: Conversión de texto a voz con diferentes voces y ajustes.
+- 🖼️ **Generación de Imágenes**: Creación de imágenes desde descripciones textuales.
+- 🎨 **Edición de Imágenes**: Modificación de imágenes existentes con instrucciones de texto.
+- 🎤 **Audio a Texto**: Transcripción precisa de archivos de audio.
+- 🤖 **Asistente**: Asistente interactivo para consultas generales y específicas.
 
 ---
 
 ## 🧑‍💻 Contribuciones
 
-¡Las contribuciones son bienvenidas! Si tienes ideas, mejoras o encuentras bugs, abre un issue o un pull request.
+¡Las contribuciones son bienvenidas! Si tienes ideas, mejoras o encuentras bugs:
+
+1. Haz fork del repositorio
+2. Crea una rama para tu característica (`git checkout -b feature/nueva-funcionalidad`)
+3. Realiza tus cambios y haz commit (`git commit -m 'Añadir nueva funcionalidad'`)
+4. Push a la rama (`git push origin feature/nueva-funcionalidad`)
+5. Abre un Pull Request
 
 ---
 
