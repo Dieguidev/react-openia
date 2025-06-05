@@ -19,7 +19,7 @@
 - ⚖️ <b>Pros & Cons:</b> Análisis detallado de ventajas y desventajas de cualquier tema mediante IA.
 - ⚡ <b>Pros & Cons Streaming:</b> Visualización en tiempo real de la respuesta generada por IA con soporte para cancelación.
 - 🔄 <b>Traducción:</b> Traducción a múltiples idiomas con selector integrado y soporte streaming.
-- 🔊 <b>Texto a audio:</b> Convertidor de texto a voz (en desarrollo).
+- 🔊 <b>Texto a audio:</b> Convertidor de texto a voz con selección de 6 diferentes voces y reproducción automática.
 - 🖼️ <b>Generación de imágenes:</b> Creación y edición de imágenes con IA (en desarrollo).
 - 🎤 <b>Audio a texto:</b> Transcripción de audio a texto (en desarrollo).
 - 🤖 <b>Asistente avanzado:</b> Asistente IA personalizado (en desarrollo).
@@ -160,6 +160,28 @@ react-gpt/
 
 ---
 
+### 🔊 Texto a Audio
+
+- Conversión de texto a voz mediante IA.
+- Selector con 6 diferentes voces: Nova, Alloy, Echo, Fable, Onyx y Shimmer.
+- Reproducción automática del audio generado.
+- Interfaz especial con reproductor de audio integrado.
+
+**Características técnicas:**
+
+- Implementado mediante el caso de uso `textToAudioUseCase` que se conecta con el backend.
+- Sistema de tipos discriminados para diferenciar mensajes de texto y audio.
+- Componente `GptMessageAudio` especializado para mostrar y reproducir archivos de audio.
+- Uso de `URL.createObjectURL()` para manejar blobs de audio recibidos del servidor.
+
+**Ejemplo de uso:**
+
+1. Escribe un texto para convertir a audio.
+2. Selecciona una de las 6 voces disponibles.
+3. El audio generado se reproduce automáticamente y queda disponible para escuchar nuevamente.
+
+---
+
 ### 💬 Interfaz de Usuario
 
 - Diseño oscuro moderno con esquema de colores azul/índigo.
@@ -167,6 +189,7 @@ react-gpt/
   - `MyMessage`: Burbujas de usuario alineadas a la derecha
   - `GptMessage`: Burbujas de asistente alineadas a la izquierda
   - `GptOrthographyMessage`: Visualización especial para correcciones
+  - `GptMessageAudio`: Visualización con reproductor de audio integrado
 - Soporte para renderizado Markdown en respuestas del asistente.
 - Animación de carga `TypingLoader` para indicar actividad.
 - Layout principal con menú lateral para navegación entre funcionalidades.
@@ -186,7 +209,6 @@ react-gpt/
 
 ## 🚧 Funcionalidades en desarrollo
 
-- 🔊 **Texto a Audio**: Conversión de texto a voz con diferentes voces y ajustes.
 - 🖼️ **Generación de Imágenes**: Creación de imágenes desde descripciones textuales.
 - 🎨 **Edición de Imágenes**: Modificación de imágenes existentes con instrucciones de texto.
 - 🎤 **Audio a Texto**: Transcripción precisa de archivos de audio.
